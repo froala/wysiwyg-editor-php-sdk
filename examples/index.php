@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<!-- define angular app -->
 <html>
 
 <head>
@@ -78,7 +77,7 @@
           id: 'my_editor'
         },
 
-        fileUploadURL: '/upload_file.php',
+        fileUploadURL: '/examples/requests/upload_file.php',
         fileUploadParams: {
           id: 'my_editor'
         },
@@ -149,7 +148,7 @@
           id: 'my_editor'
         },
 
-        fileUploadURL: '/upload_file.php',
+        fileUploadURL: '/examples/requests/upload_file.php',
         fileUploadParams: {
           id: 'my_editor'
         },
