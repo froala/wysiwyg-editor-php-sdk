@@ -77,7 +77,7 @@
           id: 'my_editor'
         },
 
-        fileUploadURL: '/examples/requests/upload_file.php',
+        fileUploadURL: '/examples/upload_file.php',
         fileUploadParams: {
           id: 'my_editor'
         },
@@ -148,7 +148,7 @@
           id: 'my_editor'
         },
 
-        fileUploadURL: '/examples/requests/upload_file.php',
+        fileUploadURL: '/examples/upload_file.php',
         fileUploadParams: {
           id: 'my_editor'
         },

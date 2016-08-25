@@ -1,41 +1,32 @@
 <?php
 
-namespace FroalaEditor\File;
+namespace FroalaEditor;
+
+require_once 'utils/utils.php';
+require_once 'utils/disk_management.php';
+
+use FroalaEditor\Utils\Utils as Utils;
+use FroalaEditor\Utils\DiskManagement as DiskManagement;
 
 class File {
 
-  public static function upload() {
+  /**
+  File upload to disk.
 
-    // Allowed extentions.
-    $allowedExts = array("txt", "pdf", "doc");
+  @param req request stream
+  @param options [optional]
+    (
+      fileRoute => string
+      validation => string: 'file', 'image'. OR function
+    )
+  @param callback
+  */
+  public static function upload($options = array()) {
 
-    // Get filename.
-    $temp = explode(".", $_FILES["file"]["name"]);
+    $options = array_merge(Utils::$defaultUploadOptions, array('validation' => 'file'), $options);
+    $response = DiskManagement::upload($options);
 
-    // Get extension.
-    $extension = end($temp);
-
-    // Validate uploaded files.
-    // Do not use $_FILES["file"]["type"] as it can be easily forged.
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mime = finfo_file($finfo, $_FILES["file"]["tmp_name"]);
-
-    if ((($mime == "text/plain")
-    || ($mime == "application/msword")
-    || ($mime == "application/x-pdf")
-    || ($mime == "application/pdf"))
-    && in_array(strtolower($extension), $allowedExts)) {
-        // Generate new random name.
-        $name = sha1(microtime()) . "." . $extension;
-
-        // Save file in the uploads folder.
-        move_uploaded_file($_FILES["file"]["tmp_name"], getcwd() . "/uploads/" . $name);
-
-        // Generate response.
-        $response = new \StdClass;
-        $response->link = "/uploads/" . $name;
-        echo stripslashes(json_encode($response));
-    }
+    echo stripslashes(json_encode($response));
   }
 
   public static function delete() {
