@@ -11,7 +11,7 @@ use FroalaEditor\Utils\DiskManagement as DiskManagement;
 class Image {
 
   /**
-  * File upload to disk.
+  * Image upload to disk.
   *
   * @param options [optional]
   *   (
@@ -22,10 +22,18 @@ class Image {
   */
   public static function upload($options = array()) {
 
-    $options = array_merge(Utils::$defaultUploadOptions, $options);
-    $response = DiskManagement::upload($options);
+    $options = array_merge(Utils::$defaultUploadOptions, array('validation' => 'image'), $options);
+    return DiskManagement::upload($options);
+  }
 
-    return $response;
+  /**
+  * Delete image from disk.
+  *
+  *  @return boolean
+  */
+  public static function delete() {
+
+    return DiskManagement::delete();
   }
 }
 

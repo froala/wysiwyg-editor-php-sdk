@@ -82,8 +82,8 @@
           id: 'my_editor'
         },
 
-        imageManagerLoadURL: '/load_images.php',
-        imageManagerDeleteURL: "/delete_image.php",
+        imageManagerLoadURL: '/examples/load_images.php',
+        imageManagerDeleteURL: "/examples/delete_image.php",
         imageManagerDeleteMethod: "POST"
       })
       // Catch image removal from the editor.
@@ -93,7 +93,7 @@
           method: "POST",
 
           // Request URL.
-          url: "/delete_image.php",
+          url: "/examples/delete_image.php",
 
           // Request params.
           data: {
@@ -116,7 +116,7 @@
           method: "POST",
 
           // Request URL.
-          url: "/delete_file.php",
+          url: "/examples/delete_file.php",
 
           // Request params.
           data: {
@@ -153,8 +153,8 @@
           id: 'my_editor'
         },
 
-        imageManagerLoadURL: '/load_images.php',
-        imageManagerDeleteURL: "/delete_image.php",
+        imageManagerLoadURL: '/examples/load_images.php',
+        imageManagerDeleteURL: "/examples/delete_image.php",
         imageManagerDeleteMethod: "POST"
       })
       // Catch image removal from the editor.
@@ -164,7 +164,7 @@
           method: "POST",
 
           // Request URL.
-          url: "/delete_image.php",
+          url: "/examples/delete_image.php",
 
           // Request params.
           data: {
@@ -187,7 +187,7 @@
           method: "POST",
 
           // Request URL.
-          url: "/delete_file.php",
+          url: "/examples/delete_file.php",
 
           // Request params.
           data: {

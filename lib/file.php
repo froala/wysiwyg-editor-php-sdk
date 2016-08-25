@@ -24,13 +24,17 @@ class File {
   public static function upload($options = array()) {
 
     $options = array_merge(Utils::$defaultUploadOptions, $options);
-    $response = DiskManagement::upload($options);
-
-    return $response;
+    return DiskManagement::upload($options);
   }
 
+  /**
+  * Delete file from disk.
+  *
+  *  @return boolean
+  */
   public static function delete() {
 
+    return DiskManagement::delete();
   }
 }
 

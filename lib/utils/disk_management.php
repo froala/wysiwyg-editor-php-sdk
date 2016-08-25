@@ -31,7 +31,7 @@ class DiskManagement {
     $name = sha1(microtime()) . "." . $extension;
 
     // Save file in the uploads folder.
-    move_uploaded_file($_FILES["file"]["tmp_name"], getcwd() . $options['fileRoute'] . $name);
+    move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . $options['fileRoute'] . $name);
 
     // Generate response.
     $response = new \StdClass;
@@ -42,6 +42,17 @@ class DiskManagement {
 
   public static function delete() {
 
+    // Get src.
+    $src = $_POST["src"];
+
+    $filePath = $_SERVER['DOCUMENT_ROOT'] . $src;
+    // Check if file exists.
+    if (file_exists($filePath)) {
+      // Delete file.
+      return unlink($filePath);
+    }
+
+    return true;
   }
 
   public static function listt() {
