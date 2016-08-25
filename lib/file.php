@@ -11,22 +11,22 @@ use FroalaEditor\Utils\DiskManagement as DiskManagement;
 class File {
 
   /**
-  File upload to disk.
-
-  @param req request stream
-  @param options [optional]
-    (
-      fileRoute => string
-      validation => string: 'file', 'image'. OR function
-    )
-  @param callback
+  * File upload to disk.
+  *
+  * @param req request stream
+  * @param options [optional]
+  *   (
+  *     fileRoute => string
+  *     validation => string: 'file' OR function
+  *   )
+  *  @return {link: 'linkPath'} or error string
   */
   public static function upload($options = array()) {
 
-    $options = array_merge(Utils::$defaultUploadOptions, array('validation' => 'file'), $options);
+    $options = array_merge(Utils::$defaultUploadOptions, $options);
     $response = DiskManagement::upload($options);
 
-    echo stripslashes(json_encode($response));
+    return $response;
   }
 
   public static function delete() {

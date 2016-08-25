@@ -7,12 +7,13 @@ require_once 'utils.php';
 class DiskManagement {
   
   /**
-  @param options
-    (
-      fileRoute => string
-      validation => string: 'file', 'image'. OR function
-    )
-  @return {link: 'linkPath'} or error string
+  *
+  * @param options
+  *   (
+  *     fileRoute => string
+  *     validation => string: 'file', 'image'. OR function
+  *   )
+  * @return {link: 'linkPath'} or error string
   */
   public static function upload($options) {
 

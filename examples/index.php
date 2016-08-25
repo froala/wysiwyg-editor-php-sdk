@@ -72,7 +72,7 @@
     $(function() {
       $('#edit').froalaEditor({
 
-        imageUploadURL: '/upload_image.php',
+        imageUploadURL: '/examples/upload_image.php',
         imageUploadParams: {
           id: 'my_editor'
         },
@@ -143,7 +143,7 @@
     $(function() {
       $('#edit-resize').froalaEditor({
 
-        imageUploadURL: '/upload_image_resize.php',
+        imageUploadURL: '/examples/upload_image_resize.php',
         imageUploadParams: {
           id: 'my_editor'
         },

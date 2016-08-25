@@ -25,7 +25,7 @@ class Utils {
 
   public static function handleValidation($validation) {
 
-    // no validation means you dont want to validate, so return affirmative
+    // No validation means you dont want to validate, so return affirmative.
     if (!$validation) {
       return true;
     }
@@ -38,7 +38,7 @@ class Utils {
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mimeType = finfo_file($finfo, $_FILES["file"]["tmp_name"]);
 
-    // validation is a function provided by the user
+    // Validation is a function provided by the user.
     if ($validation instanceof Closure) {
         return $validation($filename, $mimeType);
     }
@@ -50,7 +50,7 @@ class Utils {
       return Utils::isFileValid($filename, $mimeType, Utils::$allowedImageExts, Utils::$allowedImageMimeTypes);
     }
 
-    // else: no specific validating behaviour found
+    // Else: no specific validating behaviour found.
     return false;
   }
 }
