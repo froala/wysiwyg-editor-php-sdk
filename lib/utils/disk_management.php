@@ -30,8 +30,28 @@ class DiskManagement {
     // Generate new random name.
     $name = sha1(microtime()) . "." . $extension;
 
-    // Save file in the uploads folder.
-    move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . $options['fileRoute'] . $name);
+    $fullNamePath = $_SERVER['DOCUMENT_ROOT'] . $options['fileRoute'] . $name;
+
+    if (isset($options['resize'])) {
+      // Resize image.
+      $resize = $options['resize'];
+
+      // Parse the resize params.
+      $columns = $resize['columns'];
+      $rows = $resize['rows'];
+      $filter = isset($resize['filter']) ? $resize['filter'] : \Imagick::FILTER_UNDEFINED;
+      $blur = isset($resize['blur']) ? $resize['blur'] : 1;
+      $bestfit = isset($resize['bestfit']) ? $resize['bestfit'] : false;
+
+      $imagick = new \Imagick($_FILES["file"]["tmp_name"]);
+
+      $imagick->resizeImage($columns, $rows, $filter, $blur, $bestfit);
+      $imagick->writeImage($fullNamePath);
+      $imagick->destroy();
+    } else {
+      // Save file in the uploads folder.
+      move_uploaded_file($_FILES["file"]["tmp_name"], $fullNamePath);
+    }
 
     // Generate response.
     $response = new \StdClass;
@@ -39,6 +59,7 @@ class DiskManagement {
 
     return $response;
   }
+
 
   /**
   * Delete image from disk.
@@ -59,6 +80,7 @@ class DiskManagement {
 
     return true;
   }
+
 
   /**
   * List images from disk
