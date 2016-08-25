@@ -35,6 +35,20 @@ class Image {
 
     return DiskManagement::delete();
   }
+
+  /**
+  * List images from disk
+  *
+  * @param folderPath string
+  *
+  * @return array of image properties
+  *     - on success : [{url: 'url', thumb: 'thumb', name: 'name'}, ...]
+  *     - on error   : {error: 'error message'}
+  */
+  public static function doList($folderPath) {
+
+    return DiskManagement::doList($folderPath);
+  }
 }
 
 
