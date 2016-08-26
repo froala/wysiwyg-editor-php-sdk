@@ -2,6 +2,7 @@
 
 require '../lib/froala_editor.php';
 
+// Load Amazon S3 config from system environment variables.
 $keyStart = getenv('AWS_KEY_START');
 $acl = getenv('AWS_ACL');
 $accessKeyId = getenv('AWS_ACCESS_KEY');
@@ -15,6 +16,8 @@ $bucketV4 = getenv('AWS_BUCKET_V4');
 $regionV4 = getenv('AWS_REGION_V4');
 
 
+
+// Get hash for V2 signing method.
 $configV2 = array(
   'timezone' => 'Europe/Bucharest',
   'bucket' => $bucketV2,
@@ -27,24 +30,25 @@ $configV2 = array(
 
 $hashV2 = FroalaEditor\S3::getHashV2($configV2);
 
+// Process hash on frontend.
 $policyV2 = $hashV2->params->policy;
 $signatureV2 = $hashV2->params->signature;
 
-/*
+
+// Get hash for V4 signing method.
 $configV4 = array(
-  'bucket' => '',
-  'region' => '',
-  'keyStart' => '',
-  'acl' => '',
-  'accessKey' => '',
-  'secretKey' => ''
+  'timezone' => 'Europe/Bucharest',
+  'bucket' => $bucketV4,
+  'region' => $regionV4,
+  'keyStart' => $keyStart,
+  'acl' => $acl,
+  'accessKey' => $accessKeyId,
+  'secretKey' => $secretKey
 );
 
+// Do not process hash on frontend.
 $hashV4 = FroalaEditor\S3::getHashV4($configV4);
-
-$policyV4 = $hashV2->params->policy;
-$signatureV4 = $hashV2->params->signature;
-*/
+$hashV4 = stripslashes(json_encode($hashV4));
 
 ?>
 
@@ -287,7 +291,7 @@ $signatureV4 = $hashV2->params->signature;
             signature: '<?php echo $signatureV2; ?>',
           }
         }
-      })
+      });
 
     });
   </script>
@@ -302,29 +306,9 @@ $signatureV4 = $hashV2->params->signature;
   <script>
     $(function() {
         $('#edit-amazon-v4').froalaEditor({
-          imageUploadToS3: {
-            bucket: '<?php echo $bucketV4; ?>',
-            region: '<?php echo $regionV4; ?>',
-            keyStart: '<?php echo $keyStart; ?>',
-            params: {
-              acl: '<?php echo $acl; ?>',
-              AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
-              policy: '<?php echo $policyV4; ?>',
-              signature: '<?php echo $signatureV4; ?>',
-            }
-          },
-          fileUploadToS3: {
-            bucket: '<?php echo $bucketV4; ?>',
-            region: '<?php echo $regionV4; ?>',
-            keyStart: '<?php echo $keyStart; ?>',
-            params: {
-              acl: '<?php echo $acl; ?>',
-              AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
-              policy: '<?php echo $policyV4; ?>',
-              signature: '<?php echo $signatureV4; ?>',
-            }
-          }
-        })
+          imageUploadToS3: JSON.parse('<?php echo $hashV4; ?>'),
+          fileUploadToS3: JSON.parse('<?php echo $hashV4; ?>')
+        });
     });
   </script>
 </body>
