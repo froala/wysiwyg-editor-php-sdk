@@ -91,7 +91,7 @@ class DiskManagement {
   *     - on success : [{url: 'url', thumb: 'thumb', name: 'name'}, ...]
   *     - on error   : {error: 'error message'}
   */
-  public static function doList($folderPath) {
+  public static function getList($folderPath) {
 
     // Array of image objects to return.
     $response = array();

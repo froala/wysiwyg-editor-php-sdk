@@ -2,6 +2,12 @@
 
 require '../lib/froala_editor.php';
 
+// Create upload folder if it does not exists.
+$directoryName = $_SERVER['DOCUMENT_ROOT'] . '/examples/uploads';
+if(!is_dir($directoryName)){
+  mkdir($directoryName, 0755, true);
+}
+
 // Load Amazon S3 config from system environment variables.
 $keyStart = getenv('AWS_KEY_START');
 $acl = getenv('AWS_ACL');

@@ -12,8 +12,8 @@ class Image {
 
   public static $defaultUploadOptions = array(
     'validation' => 'image',
-    'allowedExts' => array('gif', 'jpeg', 'jpg', 'png', 'blob'),
-    'allowedMimeTypes' => array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png')
+    'allowedExts' => array('gif', 'jpeg', 'jpg', 'png', 'svg', 'blob'),
+    'allowedMimeTypes' => array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/svg+xml')
   );
 
   /**
@@ -51,9 +51,9 @@ class Image {
   *     - on success : [{url: 'url', thumb: 'thumb', name: 'name'}, ...]
   *     - on error   : {error: 'error message'}
   */
-  public static function doList($folderPath) {
+  public static function getList($folderPath) {
 
-    return DiskManagement::doList($folderPath);
+    return DiskManagement::getList($folderPath);
   }
 }
 
