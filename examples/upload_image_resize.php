@@ -4,8 +4,9 @@ require '../lib/froala_editor.php';
 
 $options = array(
   'resize' => array(
-    'columns' => 50,
-    'rows' => 50
+    'columns' => 300,
+    'rows' => 300,
+    'bestfit' => true
   )
 );
 $response = FroalaEditor\Image::upload('/examples/uploads/', $options);
