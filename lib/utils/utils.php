@@ -9,12 +9,6 @@ class Utils {
     'validation' => null
   );
 
-  public static $allowedFileExts = array('txt', 'pdf', 'doc');
-  public static $allowedImageExts = array('gif', 'jpeg', 'jpg', 'png', 'blob');
-
-  public static $allowedFileMimeTypes = array('text/plain', 'application/msword', 'application/x-pdf', 'application/pdf');
-  public static $allowedImageMimeTypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-
   public static function isFileValid($filename, $mimeType, $allowedExts, $allowedMimeTypes) {
 
     // Get extension.
@@ -23,7 +17,7 @@ class Utils {
     return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts);
   }
 
-  public static function handleValidation($validation) {
+  public static function handleValidation($validation, $allowedExts, $allowedMimeTypes) {
 
     // No validation means you dont want to validate, so return affirmative.
     if (!$validation) {
@@ -43,11 +37,8 @@ class Utils {
         return $validation($filename, $mimeType);
     }
 
-    if ($validation == 'file') {
-      return Utils::isFileValid($filename, $mimeType, Utils::$allowedFileExts, Utils::$allowedFileMimeTypes);
-    }
-    if ($validation == 'image') {
-      return Utils::isFileValid($filename, $mimeType, Utils::$allowedImageExts, Utils::$allowedImageMimeTypes);
+    if (is_string($validation)) {
+      return Utils::isFileValid($filename, $mimeType, $allowedExts, $allowedMimeTypes);
     }
 
     // Else: no specific validating behaviour found.

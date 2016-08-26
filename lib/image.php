@@ -10,6 +10,12 @@ use FroalaEditor\Utils\DiskManagement as DiskManagement;
 
 class Image {
 
+  public static $defaultUploadOptions = array(
+    'validation' => 'image',
+    'allowedExts' => array('gif', 'jpeg', 'jpg', 'png', 'blob'),
+    'allowedMimeTypes' => array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png')
+  );
+
   /**
   * Image upload to disk.
   *
@@ -22,7 +28,7 @@ class Image {
   */
   public static function upload($options = array()) {
 
-    $options = array_merge(Utils::$defaultUploadOptions, array('validation' => 'image'), $options);
+    $options = array_merge(Utils::$defaultUploadOptions, Image::$defaultUploadOptions, $options);
     return DiskManagement::upload($options);
   }
 

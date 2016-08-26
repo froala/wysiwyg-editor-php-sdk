@@ -17,7 +17,7 @@ class DiskManagement {
   */
   public static function upload($options) {
 
-    if (!Utils::handleValidation($options['validation'])) {
+    if (!Utils::handleValidation($options['validation'], $options['allowedExts'], $options['allowedMimeTypes'])) {
       return 'File does not meet the validation.';
     }
 

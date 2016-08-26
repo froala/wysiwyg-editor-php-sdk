@@ -10,6 +10,11 @@ use FroalaEditor\Utils\DiskManagement as DiskManagement;
 
 class File {
 
+  public static $defaultUploadOptions = array(
+    'allowedExts' => array('txt', 'pdf', 'doc'),
+    'allowedMimeTypes' => array('text/plain', 'application/msword', 'application/x-pdf', 'application/pdf')
+  );
+
   /**
   * File upload to disk.
   *
@@ -23,7 +28,7 @@ class File {
   */
   public static function upload($options = array()) {
 
-    $options = array_merge(Utils::$defaultUploadOptions, $options);
+    $options = array_merge(Utils::$defaultUploadOptions, File::$defaultUploadOptions, $options);
     return DiskManagement::upload($options);
   }
 
