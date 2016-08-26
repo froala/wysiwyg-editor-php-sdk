@@ -1,3 +1,53 @@
+<?php
+
+require '../lib/froala_editor.php';
+
+$keyStart = getenv('AWS_KEY_START');
+$acl = getenv('AWS_ACL');
+$accessKeyId = getenv('AWS_ACCESS_KEY');
+$secretKey = getenv('AWS_SECRET_ACCESS_KEY');
+
+
+$bucketV2 = getenv('AWS_BUCKET_V2');
+$regionV2 = getenv('AWS_REGION_V2');
+
+$bucketV4 = getenv('AWS_BUCKET_V4');
+$regionV4 = getenv('AWS_REGION_V4');
+
+
+$configV2 = array(
+  'timezone' => 'Europe/Bucharest',
+  'bucket' => $bucketV2,
+  'region' => $regionV2,
+  'keyStart' => $keyStart,
+  'acl' => $acl,
+  'accessKey' => $accessKeyId,
+  'secretKey' => $secretKey
+);
+
+$hashV2 = FroalaEditor\S3::getHashV2($configV2);
+
+$policyV2 = $hashV2->params->policy;
+$signatureV2 = $hashV2->params->signature;
+
+/*
+$configV4 = array(
+  'bucket' => '',
+  'region' => '',
+  'keyStart' => '',
+  'acl' => '',
+  'accessKey' => '',
+  'secretKey' => ''
+);
+
+$hashV4 = FroalaEditor\S3::getHashV4($configV4);
+
+$policyV4 = $hashV2->params->policy;
+$signatureV4 = $hashV2->params->signature;
+*/
+
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -214,14 +264,31 @@
   <script>
     $(function() {
 
-      $.get( "get_amazon_v2_configs", {})
-      .done(function( data ) {
+      $('#edit-amazon-v2').froalaEditor({
+        imageUploadToS3: {
+          bucket: '<?php echo $bucketV2; ?>',
+          region: '<?php echo $regionV2; ?>',
+          keyStart: '<?php echo $keyStart; ?>',
+          params: {
+            acl: '<?php echo $acl; ?>',
+            AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
+            policy: '<?php echo $policyV2; ?>',
+            signature: '<?php echo $signatureV2; ?>',
+          }
+        },
+        fileUploadToS3: {
+          bucket: '<?php echo $bucketV2; ?>',
+          region: '<?php echo $regionV2; ?>',
+          keyStart: '<?php echo $keyStart; ?>',
+          params: {
+            acl: '<?php echo $acl; ?>',
+            AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
+            policy: '<?php echo $policyV2; ?>',
+            signature: '<?php echo $signatureV2; ?>',
+          }
+        }
+      })
 
-        $('#edit-amazon-v2').froalaEditor({
-          imageUploadToS3: data,
-          fileUploadToS3: data
-        })
-      });
     });
   </script>
 
@@ -234,15 +301,30 @@
 
   <script>
     $(function() {
-
-      $.get( "get_amazon_v4_configs", {})
-      .done(function( data ) {
-
         $('#edit-amazon-v4').froalaEditor({
-          imageUploadToS3: data,
-          fileUploadToS3: data
+          imageUploadToS3: {
+            bucket: '<?php echo $bucketV4; ?>',
+            region: '<?php echo $regionV4; ?>',
+            keyStart: '<?php echo $keyStart; ?>',
+            params: {
+              acl: '<?php echo $acl; ?>',
+              AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
+              policy: '<?php echo $policyV4; ?>',
+              signature: '<?php echo $signatureV4; ?>',
+            }
+          },
+          fileUploadToS3: {
+            bucket: '<?php echo $bucketV4; ?>',
+            region: '<?php echo $regionV4; ?>',
+            keyStart: '<?php echo $keyStart; ?>',
+            params: {
+              acl: '<?php echo $acl; ?>',
+              AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
+              policy: '<?php echo $policyV4; ?>',
+              signature: '<?php echo $signatureV4; ?>',
+            }
+          }
         })
-      });
     });
   </script>
 </body>
