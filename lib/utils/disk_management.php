@@ -10,14 +10,17 @@ class DiskManagement {
   *
   * @param options
   *   (
-  *     fileRoute => string
-  *     validation => string: 'file', 'image'. OR function
+  *     validation => array OR function
+  *     resize: => array [only for images]
   *   )
   * @return {link: 'linkPath'} or error string
   */
-  public static function upload($options) {
+  public static function upload($fileRoute, $options) {
 
-    if (!Utils::handleValidation($options['validation'], $options['allowedExts'], $options['allowedMimeTypes'])) {
+    if (
+      isset($options['validation']) &&
+      !Utils::handleValidation($options['validation'])
+    ) {
       return 'File does not meet the validation.';
     }
 
@@ -30,7 +33,7 @@ class DiskManagement {
     // Generate new random name.
     $name = sha1(microtime()) . "." . $extension;
 
-    $fullNamePath = $_SERVER['DOCUMENT_ROOT'] . $options['fileRoute'] . $name;
+    $fullNamePath = $_SERVER['DOCUMENT_ROOT'] . $fileRoute . $name;
 
     if (isset($options['resize'])) {
       // Resize image.
@@ -55,7 +58,7 @@ class DiskManagement {
 
     // Generate response.
     $response = new \StdClass;
-    $response->link = $options['fileRoute'] . $name;
+    $response->link = $fileRoute . $name;
 
     return $response;
   }

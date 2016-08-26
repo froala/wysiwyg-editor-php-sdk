@@ -11,25 +11,33 @@ use FroalaEditor\Utils\DiskManagement as DiskManagement;
 class Image {
 
   public static $defaultUploadOptions = array(
-    'validation' => 'image',
-    'allowedExts' => array('gif', 'jpeg', 'jpg', 'png', 'svg', 'blob'),
-    'allowedMimeTypes' => array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/svg+xml')
+    'validation' => array(
+      'allowedExts' => array('gif', 'jpeg', 'jpg', 'png', 'svg', 'blob'),
+      'allowedMimeTypes' => array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/svg+xml')
+    ),
+    'resize' => NULL
   );
 
   /**
   * Image upload to disk.
   *
+  * @param fileRoute string
   * @param options [optional]
   *   (
-  *     fileRoute => string
-  *     validation => string: 'image'. OR function
+  *     validation => array OR function
+  *     resize: => array
   *   )
   *  @return {link: 'linkPath'} or error string
   */
-  public static function upload($options = array()) {
+  public static function upload($fileRoute, $options = NULL) {
 
-    $options = array_merge(Utils::$defaultUploadOptions, Image::$defaultUploadOptions, $options);
-    return DiskManagement::upload($options);
+    if (is_null($options)) {
+      $options = Image::$defaultUploadOptions;
+    } else {
+      $options = array_merge(Image::$defaultUploadOptions, $options);
+    }
+
+    return DiskManagement::upload($fileRoute, $options);
   }
 
   /**

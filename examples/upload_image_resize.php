@@ -2,7 +2,13 @@
 
 require '../lib/froala_editor.php';
 
-$response = FroalaEditor\Image::upload(array('fileRoute' => '/examples/uploads/', 'resize' => array('columns' => 50, 'rows' => 50)));
+$options = array(
+  'resize' => array(
+    'columns' => 50,
+    'rows' => 50
+  )
+);
+$response = FroalaEditor\Image::upload('/examples/uploads/', $options);
 
 if (is_string($response)) {
   http_response_code(404);

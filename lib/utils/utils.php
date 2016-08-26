@@ -3,13 +3,12 @@
 namespace FroalaEditor\Utils;
 
 class Utils {
-  
-  public static $defaultUploadOptions = array(
-    'fileRoute'  => '/uploads/',
-    'validation' => null
-  );
 
   public static function isFileValid($filename, $mimeType, $allowedExts, $allowedMimeTypes) {
+
+    if (!$allowedExts || !$allowedMimeTypes) {
+      return false;
+    }
 
     // Get extension.
     $extension = end($filename);
@@ -17,7 +16,7 @@ class Utils {
     return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts);
   }
 
-  public static function handleValidation($validation, $allowedExts, $allowedMimeTypes) {
+  public static function handleValidation($validation) {
 
     // No validation means you dont want to validate, so return affirmative.
     if (!$validation) {
@@ -37,8 +36,8 @@ class Utils {
         return $validation($filename, $mimeType);
     }
 
-    if (is_string($validation)) {
-      return Utils::isFileValid($filename, $mimeType, $allowedExts, $allowedMimeTypes);
+    if (is_array($validation)) {
+      return Utils::isFileValid($filename, $mimeType, $validation['allowedExts'], $validation['allowedMimeTypes']);
     }
 
     // Else: no specific validating behaviour found.
