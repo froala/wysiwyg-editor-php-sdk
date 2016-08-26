@@ -35,7 +35,9 @@ class DiskManagement {
 
     $fullNamePath = $_SERVER['DOCUMENT_ROOT'] . $fileRoute . $name;
 
-    if (isset($options['resize'])) {
+    $mimeType = Utils::getMimeType($_FILES["file"]["tmp_name"]);
+
+    if (isset($options['resize']) && $mimeType != 'image/svg+xml') {
       // Resize image.
       $resize = $options['resize'];
 
