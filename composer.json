@@ -7,7 +7,18 @@
     "froala",
     "editor",
     "php",
-    "sdk"
+    "sdk",
+    "froala",
+    "html",
+    "text",
+    "editor",
+    "wysiwyg",
+    "rich editor",
+    "rich text editor",
+    "rte",
+    "php wysiwyg",
+    "php rich text editor",
+    "php rte"
   ],
   "homepage": "https://www.froala.com/wysiwyg-editor",
   "license": "https://froala.com/wysiwyg-editor/terms/",
@@ -23,7 +34,7 @@
 
   },
   "support": {
-    "issues": "https://github.com/froala/wysiwyg-cake/issues",
+    "issues": "https://github.com/froala/froala-editor-php-sdk/issues",
     "source": "https://www.froala.com/wysiwyg-editor"
   },
   "extra": {
