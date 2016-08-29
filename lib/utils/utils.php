@@ -16,6 +16,14 @@ class Utils {
     return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts);
   }
 
+  public static function getMimeType($tmpName) {
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mimeType = finfo_file($finfo, $tmpName);
+
+    return $mimeType;
+  }
+
   public static function handleValidation($validation) {
 
     // No validation means you dont want to validate, so return affirmative.
@@ -29,7 +37,7 @@ class Utils {
     // Validate uploaded files.
     // Do not use $_FILES["file"]["type"] as it can be easily forged.
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mimeType = finfo_file($finfo, $_FILES["file"]["tmp_name"]);
+    $mimeType = Utils::getMimeType($_FILES["file"]["tmp_name"]);
 
     // Validation is a function provided by the user.
     if ($validation instanceof Closure) {
