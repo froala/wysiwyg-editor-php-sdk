@@ -9,7 +9,7 @@ $options = array(
     'bestfit' => true
   )
 );
-$response = FroalaEditor\Image::upload('/examples/uploads/', $options);
+$response = FroalaEditor_Image::upload('/examples/uploads/', $options);
 
 if (is_string($response)) {
   http_response_code(404);
@@ -17,5 +17,4 @@ if (is_string($response)) {
 }
 
 echo stripslashes(json_encode($response));
-
 ?>

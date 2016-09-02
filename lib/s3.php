@@ -203,4 +203,5 @@ class S3 {
   }
 }
 
+class_alias('FroalaEditor\S3', 'FroalaEditor_S3');
 ?>

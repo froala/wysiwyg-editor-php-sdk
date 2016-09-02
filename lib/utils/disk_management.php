@@ -85,7 +85,7 @@ class DiskManagement {
 
     return true;
   }
-
 }
 
+class_alias('FroalaEditor\Utils\DiskManagement', 'FroalaEditor_DiskManagement');
 ?>

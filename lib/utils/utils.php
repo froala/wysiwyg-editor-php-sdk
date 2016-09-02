@@ -53,6 +53,7 @@ class Utils {
   }
 }
 
+class_alias('FroalaEditor\Utils\Utils', 'FroalaEditor_Utils');
 ?>
 
 

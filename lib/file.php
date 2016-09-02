@@ -5,9 +5,6 @@ namespace FroalaEditor;
 require_once 'utils/utils.php';
 require_once 'utils/disk_management.php';
 
-use FroalaEditor\Utils\Utils as Utils;
-use FroalaEditor\Utils\DiskManagement as DiskManagement;
-
 class File {
 
   public static $defaultUploadOptions = array(
@@ -35,7 +32,7 @@ class File {
       $options = array_merge(File::$defaultUploadOptions, $options);
     }
 
-    return DiskManagement::upload($fileRoute, $options);
+    return \FroalaEditor_DiskManagement::upload($fileRoute, $options);
   }
 
   /**
@@ -45,10 +42,9 @@ class File {
   */
   public static function delete() {
 
-    return DiskManagement::delete();
+    return \FroalaEditor_DiskManagement::delete();
   }
 }
 
-
-    
+class_alias('FroalaEditor\File', 'FroalaEditor_File');
 ?>
