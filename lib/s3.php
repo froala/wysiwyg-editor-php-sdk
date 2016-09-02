@@ -4,6 +4,40 @@ namespace FroalaEditor;
 
 class S3 {
 
+  public static $SIGNATURE_V2 = 2;
+  public static $SIGNATURE_V4 = 4;
+
+  /**
+  *
+  * @param config:
+  *   (
+  *     timezone => 'Europe/Bucharest',
+  *     bucket => 'bucketName',
+  *     region => 's3',
+  *     keyStart => 'editor/',
+  *     acl => 'public-read',
+  *     accessKey => 'YOUR-AMAZON-S3-PUBLIC-ACCESS-KEY',
+  *     secretKey => 'YOUR-AMAZON-S3-SECRET-ACCESS-KEY'
+  *   )
+  * @param version: S3::$SIGNATURE_V2 or S3::$SIGNATURE_V4
+  *
+  * @return: S3 hash
+  */
+
+  public static function getHash($config, $version) {
+
+    if ($version == S3::$SIGNATURE_V2) {
+      return S3::getHashV2($config);
+    }
+
+    if ($version == S3::$SIGNATURE_V4) {
+      return S3::getHashV4($config);
+    }
+
+    return null;
+
+  }
+
   /**
   *
   * @param config:
