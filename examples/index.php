@@ -34,12 +34,8 @@ $configV2 = array(
   'secretKey' => $secretKey
 );
 
-$hashV2 = FroalaEditor\S3::getHashV2($configV2);
-
-// Process hash on frontend.
-$policyV2 = $hashV2->params->policy;
-$signatureV2 = $hashV2->params->signature;
-
+$hashV2 = FroalaEditor_S3::getHash($configV2, FroalaEditor_S3::$SIGNATURE_V2);
+$hashV2 = stripslashes(json_encode($hashV2));
 
 // Get hash for V4 signing method.
 $configV4 = array(
@@ -52,8 +48,7 @@ $configV4 = array(
   'secretKey' => $secretKey
 );
 
-// Do not process hash on frontend.
-$hashV4 = FroalaEditor\S3::getHashV4($configV4);
+$hashV4 = FroalaEditor_S3::getHash($configV4, FroalaEditor_S3::$SIGNATURE_V4);
 $hashV4 = stripslashes(json_encode($hashV4));
 
 ?>
@@ -275,28 +270,8 @@ $hashV4 = stripslashes(json_encode($hashV4));
     $(function() {
 
       $('#edit-amazon-v2').froalaEditor({
-        imageUploadToS3: {
-          bucket: '<?php echo $bucketV2; ?>',
-          region: '<?php echo $regionV2; ?>',
-          keyStart: '<?php echo $keyStart; ?>',
-          params: {
-            acl: '<?php echo $acl; ?>',
-            AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
-            policy: '<?php echo $policyV2; ?>',
-            signature: '<?php echo $signatureV2; ?>',
-          }
-        },
-        fileUploadToS3: {
-          bucket: '<?php echo $bucketV2; ?>',
-          region: '<?php echo $regionV2; ?>',
-          keyStart: '<?php echo $keyStart; ?>',
-          params: {
-            acl: '<?php echo $acl; ?>',
-            AWSAccessKeyId: '<?php echo $accessKeyId; ?>',
-            policy: '<?php echo $policyV2; ?>',
-            signature: '<?php echo $signatureV2; ?>',
-          }
-        }
+          imageUploadToS3: JSON.parse('<?php echo $hashV2; ?>'),
+          fileUploadToS3: JSON.parse('<?php echo $hashV2; ?>')
       });
 
     });

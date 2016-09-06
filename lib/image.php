@@ -5,9 +5,6 @@ namespace FroalaEditor;
 require_once 'utils/utils.php';
 require_once 'utils/disk_management.php';
 
-use FroalaEditor\Utils\Utils as Utils;
-use FroalaEditor\Utils\DiskManagement as DiskManagement;
-
 class Image {
 
   public static $defaultUploadOptions = array(
@@ -27,7 +24,7 @@ class Image {
   *     validation => array OR function
   *     resize: => array
   *   )
-  *  @return {link: 'linkPath'} or error string
+  * @return {link: 'linkPath'} or error string
   */
   public static function upload($fileRoute, $options = NULL) {
 
@@ -37,17 +34,18 @@ class Image {
       $options = array_merge(Image::$defaultUploadOptions, $options);
     }
 
-    return DiskManagement::upload($fileRoute, $options);
+    return \FroalaEditor_DiskManagement::upload($fileRoute, $options);
   }
 
   /**
   * Delete image from disk.
   *
-  *  @return boolean
+  * @param src string
+  * @return boolean
   */
-  public static function delete() {
+  public static function delete($src) {
 
-    return DiskManagement::delete();
+    return \FroalaEditor_DiskManagement::delete($src);
   }
 
   /**
@@ -108,5 +106,5 @@ class Image {
   }
 }
 
-
+class_alias('FroalaEditor\Image', 'FroalaEditor_Image');
 ?>

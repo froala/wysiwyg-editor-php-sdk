@@ -2,7 +2,7 @@
 
 require '../lib/froala_editor.php';
 
-$response = FroalaEditor\Image::upload('/examples/uploads/');
+$response = FroalaEditor_Image::upload('/examples/uploads/');
 
 if (is_string($response)) {
   http_response_code(404);
@@ -10,5 +10,4 @@ if (is_string($response)) {
 }
 
 echo stripslashes(json_encode($response));
-
 ?>

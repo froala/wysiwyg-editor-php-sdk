@@ -69,12 +69,10 @@ class DiskManagement {
   /**
   * Delete image from disk.
   *
-  *  @return boolean
+  * @param src string
+  * @return boolean
   */
-  public static function delete() {
-
-    // Get src.
-    $src = $_POST["src"];
+  public static function delete($src) {
 
     $filePath = $_SERVER['DOCUMENT_ROOT'] . $src;
     // Check if file exists.
@@ -85,7 +83,7 @@ class DiskManagement {
 
     return true;
   }
-
 }
 
+class_alias('FroalaEditor\Utils\DiskManagement', 'FroalaEditor_DiskManagement');
 ?>

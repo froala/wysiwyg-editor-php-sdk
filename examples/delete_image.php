@@ -2,7 +2,7 @@
 
 require '../lib/froala_editor.php';
 
-$response = FroalaEditor\Image::delete();
+$response = FroalaEditor_Image::delete($_POST['src']);
 
 if (!$response) {
   http_response_code(404);
@@ -10,5 +10,4 @@ if (!$response) {
 }
 
 echo stripslashes(json_encode('Success'));
-
 ?>
