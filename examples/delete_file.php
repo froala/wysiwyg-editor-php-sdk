@@ -2,7 +2,7 @@
 
 require '../lib/froala_editor.php';
 
-$response = FroalaEditor_File::delete();
+$response = FroalaEditor_File::delete($_POST['src']);
 
 if (!$response) {
   http_response_code(404);

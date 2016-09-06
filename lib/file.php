@@ -22,7 +22,7 @@ class File {
   *   (
   *     validation => array OR function
   *   )
-  *  @return {link: 'linkPath'} or error string
+  * @return {link: 'linkPath'} or error string
   */
   public static function upload($fileRoute, $options = NULL) {
 
@@ -38,11 +38,12 @@ class File {
   /**
   * Delete file from disk.
   *
-  *  @return boolean
+  * @param src string
+  * @return boolean
   */
-  public static function delete() {
+  public static function delete($src) {
 
-    return \FroalaEditor_DiskManagement::delete();
+    return \FroalaEditor_DiskManagement::delete($src);
   }
 }
 

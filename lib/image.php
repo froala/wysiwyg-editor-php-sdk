@@ -24,7 +24,7 @@ class Image {
   *     validation => array OR function
   *     resize: => array
   *   )
-  *  @return {link: 'linkPath'} or error string
+  * @return {link: 'linkPath'} or error string
   */
   public static function upload($fileRoute, $options = NULL) {
 
@@ -40,11 +40,12 @@ class Image {
   /**
   * Delete image from disk.
   *
-  *  @return boolean
+  * @param src string
+  * @return boolean
   */
-  public static function delete() {
+  public static function delete($src) {
 
-    return \FroalaEditor_DiskManagement::delete();
+    return \FroalaEditor_DiskManagement::delete($src);
   }
 
   /**
