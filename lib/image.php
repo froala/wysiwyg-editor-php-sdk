@@ -8,6 +8,7 @@ require_once 'utils/disk_management.php';
 class Image {
 
   public static $defaultUploadOptions = array(
+    'fieldname' => 'file',
     'validation' => array(
       'allowedExts' => array('gif', 'jpeg', 'jpg', 'png', 'svg', 'blob'),
       'allowedMimeTypes' => array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/svg+xml')
@@ -21,6 +22,7 @@ class Image {
   * @param fileRoute string
   * @param options [optional]
   *   (
+  *     fieldname => string
   *     validation => array OR function
   *     resize: => array
   *   )

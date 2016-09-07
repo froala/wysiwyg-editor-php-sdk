@@ -24,7 +24,7 @@ class Utils {
     return $mimeType;
   }
 
-  public static function handleValidation($validation) {
+  public static function handleValidation($validation, $fieldname) {
 
     // No validation means you dont want to validate, so return affirmative.
     if (!$validation) {
@@ -32,16 +32,16 @@ class Utils {
     }
 
     // Get filename.
-    $filename = explode(".", $_FILES["file"]["name"]);
+    $filename = explode(".", $_FILES[$fieldname]["name"]);
 
     // Validate uploaded files.
     // Do not use $_FILES["file"]["type"] as it can be easily forged.
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mimeType = Utils::getMimeType($_FILES["file"]["tmp_name"]);
+    $mimeType = Utils::getMimeType($_FILES[$fieldname]["tmp_name"]);
 
     // Validation is a function provided by the user.
-    if ($validation instanceof Closure) {
-        return $validation($filename, $mimeType);
+    if ($validation instanceof \Closure) {
+        return $validation($_FILES[$fieldname]["tmp_name"], $mimeType);
     }
 
     if (is_array($validation)) {

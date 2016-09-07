@@ -12,6 +12,7 @@ $options = array(
 $response = FroalaEditor_Image::upload('/examples/uploads/', $options);
 
 if (is_string($response)) {
+  echo $response;
   http_response_code(404);
   return;
 }

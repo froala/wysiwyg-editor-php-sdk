@@ -2,7 +2,17 @@
 
 require '../lib/froala_editor.php';
 $options = array(
-  'validation' => null
+  'fieldname' => 'myFile',
+  'validation' => function($filePath, $mimetype) {
+
+    $size = filesize($filePath);
+
+    if ($size > 10 * 1024 * 1024) {
+      return false;
+    }
+
+    return true;
+  }
 );
 $response = FroalaEditor_File::upload('/examples/uploads/', $options);
 
