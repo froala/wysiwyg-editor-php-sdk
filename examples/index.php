@@ -9,47 +9,26 @@ if(!is_dir($directoryName)){
 }
 
 // Load Amazon S3 config from system environment variables.
+$bucket = getenv('AWS_BUCKET');
+$region = getenv('AWS_REGION');
 $keyStart = getenv('AWS_KEY_START');
 $acl = getenv('AWS_ACL');
 $accessKeyId = getenv('AWS_ACCESS_KEY');
 $secretKey = getenv('AWS_SECRET_ACCESS_KEY');
 
-
-$bucketV2 = getenv('AWS_BUCKET_V2');
-$regionV2 = getenv('AWS_REGION_V2');
-
-$bucketV4 = getenv('AWS_BUCKET_V4');
-$regionV4 = getenv('AWS_REGION_V4');
-
-
-
-// Get hash for V2 signing method.
-$configV2 = array(
+// Get hash.
+$config = array(
   'timezone' => 'Europe/Bucharest',
-  'bucket' => $bucketV2,
-  'region' => $regionV2,
+  'bucket' => $bucket,
+  'region' => $region,
   'keyStart' => $keyStart,
   'acl' => $acl,
   'accessKey' => $accessKeyId,
   'secretKey' => $secretKey
 );
 
-$hashV2 = FroalaEditor_S3::getHash($configV2, FroalaEditor_S3::$SIGNATURE_V2);
-$hashV2 = stripslashes(json_encode($hashV2));
-
-// Get hash for V4 signing method.
-$configV4 = array(
-  'timezone' => 'Europe/Bucharest',
-  'bucket' => $bucketV4,
-  'region' => $regionV4,
-  'keyStart' => $keyStart,
-  'acl' => $acl,
-  'accessKey' => $accessKeyId,
-  'secretKey' => $secretKey
-);
-
-$hashV4 = FroalaEditor_S3::getHash($configV4, FroalaEditor_S3::$SIGNATURE_V4);
-$hashV4 = stripslashes(json_encode($hashV4));
+$hash = FroalaEditor_S3::getHash($config);
+$hash = stripslashes(json_encode($hash));
 
 ?>
 
@@ -260,36 +239,20 @@ $hashV4 = stripslashes(json_encode($hashV4));
   </script>
 
   <div class="sample">
-    <h2>Sample 3: Save to Amazon using signature version 2</h2>
+    <h2>Sample 3: Save to Amazon using signature version 4</h2>
     <form>
-      <textarea id="edit-amazon-v2" name="content"></textarea>
+      <textarea id="edit-amazon" name="content"></textarea>
     </form>
   </div>
 
   <script>
     $(function() {
 
-      $('#edit-amazon-v2').froalaEditor({
-          imageUploadToS3: JSON.parse('<?php echo $hashV2; ?>'),
-          fileUploadToS3: JSON.parse('<?php echo $hashV2; ?>')
+      $('#edit-amazon').froalaEditor({
+          imageUploadToS3: JSON.parse('<?php echo $hash; ?>'),
+          fileUploadToS3: JSON.parse('<?php echo $hash; ?>')
       });
 
-    });
-  </script>
-
-  <div class="sample">
-    <h2>Sample 4: Save to Amazon using signature version 4</h2>
-    <form>
-      <textarea id="edit-amazon-v4" name="content"></textarea>
-    </form>
-  </div>
-
-  <script>
-    $(function() {
-        $('#edit-amazon-v4').froalaEditor({
-          imageUploadToS3: JSON.parse('<?php echo $hashV4; ?>'),
-          fileUploadToS3: JSON.parse('<?php echo $hashV4; ?>')
-        });
     });
   </script>
 </body>
