@@ -10,6 +10,7 @@ class DiskManagement {
   *
   * @param options
   *   (
+  *     fieldname => string
   *     validation => array OR function
   *     resize: => array [only for images]
   *   )
@@ -17,15 +18,21 @@ class DiskManagement {
   */
   public static function upload($fileRoute, $options) {
 
+    $fieldname = $options['fieldname'];
+
+    if (empty($fieldname) || empty($_FILES[$fieldname])) {
+      return 'Fieldname is not correct. It must be: ' . $fieldname;
+    }
+
     if (
       isset($options['validation']) &&
-      !Utils::handleValidation($options['validation'])
+      !Utils::handleValidation($options['validation'], $fieldname)
     ) {
       return 'File does not meet the validation.';
     }
 
     // Get filename.
-    $temp = explode(".", $_FILES["file"]["name"]);
+    $temp = explode(".", $_FILES[$fieldname]["name"]);
 
     // Get extension.
     $extension = end($temp);
@@ -35,7 +42,7 @@ class DiskManagement {
 
     $fullNamePath = $_SERVER['DOCUMENT_ROOT'] . $fileRoute . $name;
 
-    $mimeType = Utils::getMimeType($_FILES["file"]["tmp_name"]);
+    $mimeType = Utils::getMimeType($_FILES[$fieldname]["tmp_name"]);
 
     if (isset($options['resize']) && $mimeType != 'image/svg+xml') {
       // Resize image.
@@ -48,14 +55,14 @@ class DiskManagement {
       $blur = isset($resize['blur']) ? $resize['blur'] : 1;
       $bestfit = isset($resize['bestfit']) ? $resize['bestfit'] : false;
 
-      $imagick = new \Imagick($_FILES["file"]["tmp_name"]);
+      $imagick = new \Imagick($_FILES[$fieldname]["tmp_name"]);
 
       $imagick->resizeImage($columns, $rows, $filter, $blur, $bestfit);
       $imagick->writeImage($fullNamePath);
       $imagick->destroy();
     } else {
       // Save file in the uploads folder.
-      move_uploaded_file($_FILES["file"]["tmp_name"], $fullNamePath);
+      move_uploaded_file($_FILES[$fieldname]["tmp_name"], $fullNamePath);
     }
 
     // Generate response.

@@ -8,6 +8,7 @@ require_once 'utils/disk_management.php';
 class File {
 
   public static $defaultUploadOptions = array(
+    'fieldname' => 'file',
     'validation' => array(
       'allowedExts' => array('txt', 'pdf', 'doc'),
       'allowedMimeTypes' => array('text/plain', 'application/msword', 'application/x-pdf', 'application/pdf')
@@ -20,6 +21,7 @@ class File {
   * @param fileRoute string
   * @param options [optional]
   *   (
+  *     fieldname => string
   *     validation => array OR function
   *   )
   * @return {link: 'linkPath'} or error string
