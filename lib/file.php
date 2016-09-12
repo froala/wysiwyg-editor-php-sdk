@@ -6,7 +6,6 @@ require_once 'utils/utils.php';
 require_once 'utils/disk_management.php';
 
 class File {
-
   public static $defaultUploadOptions = array(
     'fieldname' => 'file',
     'validation' => array(

@@ -2,13 +2,10 @@
 
 require '../lib/froala_editor.php';
 
-$response = FroalaEditor_Image::delete($_POST['src']);
-
-if (!$response) {
+try {
+  $response = FroalaEditor_Image::delete($_POST['src']);
+  echo stripslashes(json_encode('Success'));
+} catch (Exception $e) {
   echo $response;
   http_response_code(404);
-  return;
 }
-
-echo stripslashes(json_encode('Success'));
-?>

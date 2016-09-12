@@ -3,9 +3,18 @@
 namespace FroalaEditor\Utils;
 
 class Utils {
-
-  public static function isFileValid($filename, $mimeType, $allowedExts, $allowedMimeTypes) {
-
+  /**
+   * Check if file is matching the specified allowed extensions and mime types.
+   *
+   * @param $filename string
+   * @param $mimeType string
+   * @param $allowedExts Array
+   * @param $allowedMimeTypes Array
+   *
+   * @return boolean
+   */
+  private static function isFileValid($filename, $mimeType, $allowedExts, $allowedMimeTypes) {
+    // Skip if the allowed extensions or mime types are missing.
     if (!$allowedExts || !$allowedMimeTypes) {
       return false;
     }
@@ -16,6 +25,13 @@ class Utils {
     return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts);
   }
 
+  /**
+   * Get the mime type of a file.
+   *
+   * @param $tmpName string
+   *
+   * @return string
+   */
   public static function getMimeType($tmpName) {
 
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -24,8 +40,15 @@ class Utils {
     return $mimeType;
   }
 
-  public static function handleValidation($validation, $fieldname) {
-
+  /**
+   * Check if a file is valid.
+   *
+   * @param $validation array or function
+   * @param $fieldname string
+   *
+   * @return boolean
+   */
+  public static function isValid($validation, $fieldname) {
     // No validation means you dont want to validate, so return affirmative.
     if (!$validation) {
       return true;
@@ -37,7 +60,7 @@ class Utils {
     // Validate uploaded files.
     // Do not use $_FILES["file"]["type"] as it can be easily forged.
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mimeType = Utils::getMimeType($_FILES[$fieldname]["tmp_name"]);
+    $mimeType = self::getMimeType($_FILES[$fieldname]["tmp_name"]);
 
     // Validation is a function provided by the user.
     if ($validation instanceof \Closure) {
@@ -45,7 +68,7 @@ class Utils {
     }
 
     if (is_array($validation)) {
-      return Utils::isFileValid($filename, $mimeType, $validation['allowedExts'], $validation['allowedMimeTypes']);
+      return self::isFileValid($filename, $mimeType, $validation['allowedExts'], $validation['allowedMimeTypes']);
     }
 
     // Else: no specific validating behaviour found.
@@ -53,8 +76,5 @@ class Utils {
   }
 }
 
+// Define alias.
 class_alias('FroalaEditor\Utils\Utils', 'FroalaEditor_Utils');
-?>
-
-
-

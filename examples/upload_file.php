@@ -4,13 +4,11 @@ require '../lib/froala_editor.php';
 $options = array(
   'validation' => null
 );
-$response = FroalaEditor_File::upload('/examples/uploads/', $options);
 
-if (is_string($response)) {
+try {
+  $response = FroalaEditor_File::upload('/examples/uploads/', $options);
+  echo stripslashes(json_encode($response));
+} catch (Exception $e) {
   echo $response;
   http_response_code(404);
-  return;
 }
-
-echo stripslashes(json_encode($response));
-?>

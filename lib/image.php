@@ -6,7 +6,6 @@ require_once 'utils/utils.php';
 require_once 'utils/disk_management.php';
 
 class Image {
-
   public static $defaultUploadOptions = array(
     'fieldname' => 'file',
     'validation' => array(
@@ -29,13 +28,14 @@ class Image {
   * @return {link: 'linkPath'} or error string
   */
   public static function upload($fileRoute, $options = NULL) {
-
+    // Check if there are any options passed.
     if (is_null($options)) {
       $options = Image::$defaultUploadOptions;
     } else {
       $options = array_merge(Image::$defaultUploadOptions, $options);
     }
 
+    // Upload image.
     return \FroalaEditor_DiskManagement::upload($fileRoute, $options);
   }
 
@@ -46,7 +46,7 @@ class Image {
   * @return boolean
   */
   public static function delete($src) {
-
+    // Delete image.
     return \FroalaEditor_DiskManagement::delete($src);
   }
 
@@ -78,30 +78,29 @@ class Image {
 
     // Check if folder exists.
     if ($fnames) {
-        // Go through all the filenames in the folder.
-        foreach ($fnames as $name) {
-            // Filename must not be a folder.
-            if (!is_dir($name)) {
-                // Check if file is an image.
+      // Go through all the filenames in the folder.
+      foreach ($fnames as $name) {
+        // Filename must not be a folder.
+        if (!is_dir($name)) {
+          // Check if file is an image.
 
-                if (in_array(mime_content_type($absoluteFolderPath . $name), $image_types)) {
-                    // Build the image.
-                    $img = new \StdClass;
-                    $img->url = $folderPath . $name;
-                    $img->thumb = $thumbPath . $name;
-                    $img->name = $name;
+          if (in_array(mime_content_type($absoluteFolderPath . $name), $image_types)) {
+            // Build the image.
+            $img = new \StdClass;
+            $img->url = $folderPath . $name;
+            $img->thumb = $thumbPath . $name;
+            $img->name = $name;
 
-                    // Add to the array of image.
-                    array_push($response, $img);
-                }
-            }
+            // Add to the array of image.
+            array_push($response, $img);
+          }
         }
+      }
     }
 
     // Folder does not exist, respond with a JSON to throw error.
     else {
-        $response = new StdClass;
-        $response->error = "Images folder does not exist!";
+      throw new Exception('Images folder does not exist!');
     }
 
     return $response;
