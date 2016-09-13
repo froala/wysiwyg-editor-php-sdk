@@ -9,13 +9,11 @@ $options = array(
     'bestfit' => true
   )
 );
-$response = FroalaEditor_Image::upload('/examples/uploads/', $options);
 
-if (is_string($response)) {
+try {
+  $response = FroalaEditor_Image::upload('/examples/uploads/', $options);
+  echo stripslashes(json_encode($response));
+} catch (Exception $e) {
   echo $response;
   http_response_code(404);
-  return;
 }
-
-echo stripslashes(json_encode($response));
-?>

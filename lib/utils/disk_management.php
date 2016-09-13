@@ -5,8 +5,8 @@ namespace FroalaEditor\Utils;
 require_once 'utils.php';
 
 class DiskManagement {
-  
   /**
+  * Upload a file to the specified location.
   *
   * @param options
   *   (
@@ -14,6 +14,7 @@ class DiskManagement {
   *     validation => array OR function
   *     resize: => array [only for images]
   *   )
+  *
   * @return {link: 'linkPath'} or error string
   */
   public static function upload($fileRoute, $options) {
@@ -21,14 +22,14 @@ class DiskManagement {
     $fieldname = $options['fieldname'];
 
     if (empty($fieldname) || empty($_FILES[$fieldname])) {
-      return 'Fieldname is not correct. It must be: ' . $fieldname;
+      throw new Exception('Fieldname is not correct. It must be: ' . $fieldname);
     }
 
     if (
       isset($options['validation']) &&
-      !Utils::handleValidation($options['validation'], $fieldname)
+      !Utils::isValid($options['validation'], $fieldname)
     ) {
-      return 'File does not meet the validation.';
+      throw new Exception('File does not meet the validation.');
     }
 
     // Get filename.
@@ -74,7 +75,7 @@ class DiskManagement {
 
 
   /**
-  * Delete image from disk.
+  * Delete file from disk.
   *
   * @param src string
   * @return boolean
@@ -92,5 +93,5 @@ class DiskManagement {
   }
 }
 
+// Define alias.
 class_alias('FroalaEditor\Utils\DiskManagement', 'FroalaEditor_DiskManagement');
-?>

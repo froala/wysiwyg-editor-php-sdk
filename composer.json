@@ -1,5 +1,5 @@
 {
-  "name": "froala-editor-node-sdk",
+  "name": "wysiwyg-editor-php-sdk",
   "version": "2.3.4-rc.1",
   "description": "PHP SDK for Froala WYSIWYG Editor",
   "type": "php-plugin",
@@ -21,7 +21,7 @@
     "php rte"
   ],
   "homepage": "https://www.froala.com/wysiwyg-editor",
-  "license": "https://froala.com/wysiwyg-editor/terms/",
+  "license": "proprietary",
   "authors": [
     {
       "name": "Froala Labs",
@@ -30,15 +30,14 @@
   ],
   "require": {
     "components/jquery": ">=1.11.0",
-    "fortawesome/font-awesome": ">=4.4.0"
-
+    "fortawesome/font-awesome": ">=4.4.0",
+    "froala/wysiwyg-editor": "dev-master"
   },
   "support": {
     "issues": "https://github.com/froala/froala-editor-php-sdk/issues",
     "source": "https://www.froala.com/wysiwyg-editor"
   },
   "extra": {
-    "installer-name": "Froala Editor",
     "installer-name": "FroalaEditor"
   }
 }
