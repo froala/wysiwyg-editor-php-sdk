@@ -39,4 +39,8 @@ The following PHP extensions are required:
 
 ## License
 
-The Froala WYSIWYG Editor PHP SDK is licensed under MIT license.
+The Froala WYSIWYG Editor PHP SDK is licensed under MIT license.  However, in order to use Froala WYSIWYG HTML Editor plugin you should purchase a license for it.
+
+Froala Editor has [3 different licenses](http://froala.com/wysiwyg-editor/pricing) for commercial use.
+For details please see [License Agreement](http://froala.com/wysiwyg-editor/terms).
+
