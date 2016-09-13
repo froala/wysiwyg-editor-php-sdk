@@ -1,6 +1,6 @@
 # Froala WYSIWYG Editor PHP SDK
 
-The Froala Editor PHP SDK library provides server side integration for editor most common actions.
+Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor) server side integration in PHP projects.
 
 ## Dependencies
 
