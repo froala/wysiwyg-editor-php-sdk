@@ -28,14 +28,13 @@ The following PHP extensions are required:
 
         composer install
 
+## Documentation
+
+ * [Official documentation](https://www.froala.com/wysiwyg-editor/docs/sdks/php)
 
 ## Help
 - Found a bug or have some suggestions? Just submit an issue.
 - Having trouble with your integration? [Contact Froala Support team](http://froala.dev/wysiwyg-editor/contact).
-
-## Documentation
-
- * [Official documentation](https://www.froala.com/wysiwyg-editor/docs/sdks/php)
 
 ## License
 
