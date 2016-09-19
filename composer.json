@@ -1,5 +1,5 @@
 {
-  "name": "wysiwyg-editor-php-sdk",
+  "name": "froala/wysiwyg-editor-php-sdk",
   "version": "2.3.4-rc.1",
   "description": "PHP SDK for Froala WYSIWYG Editor",
   "type": "php-plugin",
