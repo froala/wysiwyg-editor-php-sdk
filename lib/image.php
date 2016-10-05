@@ -59,7 +59,7 @@ class Image {
   *     - on success : [{url: 'url', thumb: 'thumb', name: 'name'}, ...]
   *     - on error   : {error: 'error message'}
   */
-  public static function list($folderPath, $thumbPath = null) {
+  public static function getList($folderPath, $thumbPath = null) {
 
     if (empty($thumbPath)) {
       $thumbPath = $folderPath;
