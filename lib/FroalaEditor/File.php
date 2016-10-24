@@ -2,6 +2,8 @@
 
 namespace FroalaEditor;
 
+use FroalaEditor\Utils\DiskManagement;
+
 class File {
   public static $defaultUploadOptions = array(
     'fieldname' => 'file',
@@ -30,7 +32,7 @@ class File {
       $options = array_merge(File::$defaultUploadOptions, $options);
     }
 
-    return \FroalaEditor_DiskManagement::upload($fileRoute, $options);
+    return DiskManagement::upload($fileRoute, $options);
   }
 
   /**
@@ -41,7 +43,7 @@ class File {
   */
   public static function delete($src) {
 
-    return \FroalaEditor_DiskManagement::delete($src);
+    return DiskManagement::delete($src);
   }
 }
 

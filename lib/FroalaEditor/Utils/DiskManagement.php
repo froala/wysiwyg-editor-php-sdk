@@ -2,6 +2,8 @@
 
 namespace FroalaEditor\Utils;
 
+use FroalaEditor\Utils\Utils;
+
 class DiskManagement {
   /**
   * Upload a file to the specified location.
@@ -20,14 +22,14 @@ class DiskManagement {
     $fieldname = $options['fieldname'];
 
     if (empty($fieldname) || empty($_FILES[$fieldname])) {
-      throw new Exception('Fieldname is not correct. It must be: ' . $fieldname);
+      throw new \Exception('Fieldname is not correct. It must be: ' . $fieldname);
     }
 
     if (
       isset($options['validation']) &&
       !Utils::isValid($options['validation'], $fieldname)
     ) {
-      throw new Exception('File does not meet the validation.');
+      throw new \Exception('File does not meet the validation.');
     }
 
     // Get filename.
