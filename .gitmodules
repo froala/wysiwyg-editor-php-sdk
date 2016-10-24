@@ -1,4 +1,4 @@
-[submodule "example"]
-	path = example
+[submodule "examples"]
+	path = examples
 	url = git@github.com:froala/editor-php-sdk-example.git
   ignore = all
