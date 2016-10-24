@@ -1,0 +1,13 @@
+{
+  "name": "froala/wysiwyg-editor-php-sdk-example",
+  "require": {
+    "components/jquery": ">=1.11.0",
+    "fortawesome/font-awesome": ">=4.4.0",
+    "froala/wysiwyg-editor": ">=2.3.5",
+    "froala/wysiwyg-editor-php-sdk": "dev-master"
+  },
+  "support": {
+    "issues": "https://github.com/froala/froala-editor-php-sdk/issues",
+    "source": "https://www.froala.com/wysiwyg-editor"
+  }
+}

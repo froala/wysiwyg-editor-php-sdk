@@ -2,8 +2,6 @@
 
 namespace FroalaEditor\Utils;
 
-require_once 'utils.php';
-
 class DiskManagement {
   /**
   * Upload a file to the specified location.

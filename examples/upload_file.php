@@ -1,6 +1,7 @@
 <?php
 
-require '../lib/froala_editor.php';
+require __DIR__ . '/vendor/autoload.php';
+
 $options = array(
   'validation' => null
 );

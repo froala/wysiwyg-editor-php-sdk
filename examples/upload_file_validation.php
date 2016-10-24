@@ -1,6 +1,7 @@
 <?php
 
-require '../lib/froala_editor.php';
+require __DIR__ . '/vendor/froala/wysiwyg-editor-php-sdk/lib/froala_editor.php';
+
 $options = array(
   'fieldname' => 'myFile',
   'validation' => function($filePath, $mimetype) {

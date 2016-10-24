@@ -2,9 +2,6 @@
 
 namespace FroalaEditor;
 
-require_once 'utils/utils.php';
-require_once 'utils/disk_management.php';
-
 class Image {
   public static $defaultUploadOptions = array(
     'fieldname' => 'file',
