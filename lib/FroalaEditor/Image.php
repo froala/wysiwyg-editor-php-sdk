@@ -31,7 +31,7 @@ class Image {
     if (is_null($options)) {
       $options = Image::$defaultUploadOptions;
     } else {
-      $options = array_merge_recursive(Image::$defaultUploadOptions, $options);
+      $options = array_merge(Image::$defaultUploadOptions, $options);
     }
 
     // Upload image.
