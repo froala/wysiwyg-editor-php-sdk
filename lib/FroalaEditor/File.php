@@ -29,7 +29,7 @@ class File {
     if (is_null($options)) {
       $options = File::$defaultUploadOptions;
     } else {
-      $options = array_merge(File::$defaultUploadOptions, $options);
+      $options = array_merge_recursive(File::$defaultUploadOptions, $options);
     }
 
     return DiskManagement::upload($fileRoute, $options);
