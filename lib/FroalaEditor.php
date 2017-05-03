@@ -12,7 +12,7 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
 }
 
 function requireDependencies() {
-    $requiredExtensions = ['fileinfo'];
+    $requiredExtensions = ['fileinfo', 'imagick'];
     foreach ($requiredExtensions AS $ext) {
         if (!extension_loaded($ext)) {
             throw new Exception('The Froala Editor SDK library requires the ' . $ext . ' extension.');
