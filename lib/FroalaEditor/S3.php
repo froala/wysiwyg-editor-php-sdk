@@ -41,6 +41,10 @@ class S3 {
     $config['region'] = !empty($config['region']) ? $config['region'] : 'us-east-1';
     $config['region'] = $config['region'] == 's3' ? 'us-east-1' : $config['region'];
 
+    if (empty($config['conditions'])) {
+      $config['conditions'] = array();
+    }
+
     // Set date timezone.
     date_default_timezone_set($config['timezone']);
 
@@ -63,7 +67,7 @@ class S3 {
     $policy = base64_encode(json_encode(array(
       // ISO 8601 - date('c'); generates uncompatible date, so better do it manually.
       'expiration' => date('Y-m-d\TH:i:s.000\Z', strtotime('+5 minutes')), // 5 minutes into the future.
-      'conditions' => array(
+      'conditions' => array_merge(array(
         array('bucket' => $bucket),
         array('acl' => $acl),
         array('success_action_status' => '201'),
@@ -75,7 +79,7 @@ class S3 {
         array('x-amz-date' => $xAmzDate),
         array('starts-with', '$key', $keyStart),
         array('starts-with', '$Content-Type', '') // Accept all files.
-      )
+      ), $config['conditions'])
     )));
 
     // Generate signature.
@@ -99,6 +103,12 @@ class S3 {
     $params->{'x-amz-credential'} = $credential;
     $params->{'x-amz-date'} = $xAmzDate;
     $params->{'x-amz-signature'} = $signature;
+
+    foreach ($config['conditions'] as $value) {
+      foreach ($value as $k => $v) {
+        $params->{$k} = $v;
+      }
+    }
 
     // Set params in response.
     $response->params = $params;
