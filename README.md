@@ -1,5 +1,8 @@
 # Froala WYSIWYG Editor PHP SDK
 
+[![Packagist](https://img.shields.io/packagist/v/froala/wysiwyg-editor-php-sdk.svg)](https://packagist.org/packages/froala/wysiwyg-editor-php-sdk)
+[![Packagist](https://img.shields.io/packagist/dt/froala/wysiwyg-editor-php-sdk.svg)](https://packagist.org/packages/froala/wysiwyg-editor-php-sdk)
+
 Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor) server side integration in PHP projects.
 
 ## Dependencies
