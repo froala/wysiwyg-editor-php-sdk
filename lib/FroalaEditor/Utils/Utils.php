@@ -22,7 +22,7 @@ class Utils {
     // Get extension.
     $extension = end($filename);
 
-    return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts);
+    return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts, true);
   }
 
   /**
