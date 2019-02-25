@@ -66,7 +66,7 @@ class S3 {
     // Build policy.
     $policy = base64_encode(json_encode(array(
       // ISO 8601 - date('c'); generates uncompatible date, so better do it manually.
-      'expiration' => date('Y-m-d\TH:i:s.000\Z', strtotime('+5 minutes')), // 5 minutes into the future.
+      'expiration' => date('Y-m-d\TH:i:s.000\Z', strtotime('+10 hours')), // 10 hours into the future.
       'conditions' => array_merge(array(
         array('bucket' => $bucket),
         array('acl' => $acl),
