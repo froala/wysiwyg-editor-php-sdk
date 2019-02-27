@@ -3,6 +3,7 @@
 namespace FroalaEditor;
 
 use FroalaEditor\Utils\DiskManagement;
+use \Exception;
 
 class Image {
   public static $defaultUploadOptions = array(
