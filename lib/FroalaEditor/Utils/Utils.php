@@ -6,10 +6,10 @@ class Utils {
   /**
    * Check if file is matching the specified allowed extensions and mime types.
    *
-   * @param $filename string
+   * @param $filename array
    * @param $mimeType string
-   * @param $allowedExts Array
-   * @param $allowedMimeTypes Array
+   * @param $allowedExts array
+   * @param $allowedMimeTypes array
    *
    * @return boolean
    */
@@ -22,7 +22,7 @@ class Utils {
     // Get extension.
     $extension = end($filename);
 
-    return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts);
+    return in_array(strtolower($mimeType), $allowedMimeTypes) && in_array(strtolower($extension), $allowedExts, true);
   }
 
   /**
