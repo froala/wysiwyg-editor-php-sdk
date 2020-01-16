@@ -28,7 +28,11 @@
       "role": "Maintainer"
     }
   ],
-  "require": {},
+  "require": {
+    "php": ">=5.4.0",
+    "ext-fileinfo": "*",
+    "ext-imagick": "*"
+  },
   "autoload": {
     "psr-0": {
         "FroalaEditor": "lib/"
