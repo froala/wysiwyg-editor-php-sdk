@@ -30,6 +30,8 @@ The following PHP extensions are required:
  Or if you installed composer globally:
 
         composer install
+##### Note
+> Third-party plugins aren't supported.
 
 ## Documentation
 
