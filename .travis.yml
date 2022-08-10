@@ -14,10 +14,8 @@ branches:
     - /QE*/
     - /RC*/
     - /Release-Master*/
-
 env:
 - SHORT_COMMIT= `git rev-parse --short=7 ${TRAVIS_COMMIT}`
-
 before_install:
 #see some envs
   - echo $TRAVIS_BRANCH
@@ -29,9 +27,7 @@ jobs:
     if: commit_message =~ /(deploy-yes)/
     script: 
       - chmod u+x build-push-to-nexus.sh && bash build-push-to-nexus.sh
-
 #######################
-
 notifications:
   email:
     recipients:
