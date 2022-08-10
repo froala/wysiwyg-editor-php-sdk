@@ -1,8 +1,6 @@
 if [ ${TRAVIS_PULL_REQUEST} != "false" ];  then echo "Not publishing a pull request !!!" && exit 0; fi
-
 #  Validate that this is a valid branch for CI/CD
 #
-
 export BRANCH_NAME=`echo "${TRAVIS_BRANCH}" | tr '[:upper:]' '[:lower:]'`
 case "${BRANCH_NAME}" in
         dev*) echo "Branch ${TRAVIS_BRANCH} is eligible for CI/CD" ;;
@@ -32,7 +30,6 @@ ARCHIVE_NAME="${BUILD_REPO_NAME}-${TRAVIS_BRANCH}-${PACKAGE_VERSION}.zip"
 #tar -cvf "/tmp/${ARCHIVE_NAME}" .
 zip -r "/tmp/${ARCHIVE_NAME}" .
 mv "/tmp/${ARCHIVE_NAME}" ./
-
 echo "archive name : ${ARCHIVE_NAME}"
 ls -latrh
 # push it to nexus
