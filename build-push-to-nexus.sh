@@ -19,12 +19,7 @@ echo ${DEPLOYMENT_SERVER}
 export SHORT_COMMIT=`git rev-parse --short=7 ${TRAVIS_COMMIT}`
 echo "short commit $SHORT_COMMIT"
 sudo apt-get update && sudo apt-get install -y jq unzip zip
-#########
-#   core library will be installed in demo app
-#   get the core library we need to test 
-
-PACKAGE_NAME=`jq '.name' version.json | tr -d '"'` 
-PACKAGE_VERSION=`jq '.version' version.json | tr -d '"'`
+PACKAGE_VERSION=`jq '.version' composer.json | tr -d '"'`
 # archive and upload to nexus raw repo
 ARCHIVE_NAME="${BUILD_REPO_NAME}-${TRAVIS_BRANCH}-${PACKAGE_VERSION}.zip"
 #tar -cvf "/tmp/${ARCHIVE_NAME}" .
