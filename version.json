@@ -1,0 +1,14 @@
+{
+        "comment-1": " Please update this file for any new branch with core libary name - package name and version uploaded to nexus",
+        "name": "froala-editor-devops",
+        "version": "4.0.6",
+        "comment-2": "Please specify the maximum allowed deployments per environment",
+        "dev": "1",
+        "qa": "2",
+        "qe": "2",
+        "stg": "1",  
+        "comment-3": "froala-editor-sdk - set the branchname of php sdk git repo",
+        "php_sdk_name": "wysiwyg-editor-php-sdk",
+        "php_sdk_repo": "github.com/froala/wysiwyg-editor-php-sdk-mcs.git",
+        "php_sdk_branch": "devops"
+}
