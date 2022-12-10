@@ -2,10 +2,8 @@ git:
   depth: false
   quiet: false
 language: generic
-dist: bionic 
-sudo: required
-# deploy on specific branches
-#  inconsistent results ; we'll validate with a script  
+dist: bionic
+sudo: required  
 branches:
   only:
     - /dev*/
@@ -17,7 +15,6 @@ branches:
 env:
 - SHORT_COMMIT= `git rev-parse --short=7 ${TRAVIS_COMMIT}`
 before_install:
-#see some envs
   - echo $TRAVIS_BRANCH
   - echo $PWD
   - echo $TRAVIS_COMMIT
@@ -27,11 +24,9 @@ jobs:
     if: commit_message =~ /(deploy-yes)/
     script: 
       - chmod u+x build-push-to-nexus.sh && bash build-push-to-nexus.sh
-#######################
 notifications:
   email:
     recipients:
       - harasunu.narayan@froala.com
-#      - other recipient
-    on_success: always # default: change
-    on_failure: always # default: always
+    on_success: always
+    on_failure: always
