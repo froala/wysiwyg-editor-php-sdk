@@ -113,7 +113,7 @@ class S3 {
     // Set params in response.
     $response->params = $params;
 
-    return $response;
+    return json_encode($response);
   }
 }
 
