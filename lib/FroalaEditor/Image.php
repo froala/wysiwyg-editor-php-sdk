@@ -90,6 +90,7 @@ class Image {
             $img->url = $folderPath . $name;
             $img->thumb = $thumbPath . $name;
             $img->name = $name;
+            $img->test = $name;
 
             // Add to the array of image.
             array_push($response, $img);
