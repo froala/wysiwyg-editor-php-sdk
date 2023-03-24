@@ -8,7 +8,7 @@
 require_once(__DIR__ . DIRECTORY_SEPARATOR . 'autoload.php');
 
 if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-    throw new Braintree_Exception('PHP version >= 5.4.0 required');
+    throw new Exception('PHP version >= 5.4.0 required');
 }
 
 function requireDependencies() {
