@@ -92,7 +92,7 @@ class S3 {
     // Prepare response.
     $response = new \StdClass;
     $response->bucket = $bucket;
-    $response->region = $region != 'us-east-1' ? 's3-' . $region : 's3';
+    $response->region = $region != 'us-east-1' ? 's3.' . $region : 's3';
     $response->keyStart = $keyStart;
 
     // Prepare params.
@@ -113,7 +113,7 @@ class S3 {
     // Set params in response.
     $response->params = $params;
 
-    return $response;
+    return json_encode($response);
   }
 }
 
