@@ -103,7 +103,7 @@ jobs:
           git push origin "$BRANCH"
 
       # --------------------------------------------
-      # Create Pull Request (Rails-style, release-gated)
+      # Create Pull Request 
       # --------------------------------------------
       - name: Create Pull Request
         env:
