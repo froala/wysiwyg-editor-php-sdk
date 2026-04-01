@@ -1,6 +1,6 @@
 {
   "name": "froala/wysiwyg-editor-php-sdk",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "PHP SDK for Froala WYSIWYG Editor",
   "type": "php-plugin",
   "keywords": [
@@ -35,10 +35,10 @@
   },
   "autoload": {
     "psr-0": {
-        "FroalaEditor": "lib/"
+      "FroalaEditor": "lib/"
     },
     "psr-4": {
-        "FroalaEditor\\": "lib/FroalaEditor"
+      "FroalaEditor\\": "lib/FroalaEditor"
     }
   },
   "support": {
